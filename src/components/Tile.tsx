@@ -50,20 +50,21 @@ export default function Tile({
       className={`${baseClass} ${sizeClass} ${colorClass} ${animClass}`}
       style={animStyle}
     >
-      {/* Consonant */}
-      <span className="text-2xl sm:text-3xl font-bold leading-none">
-        {consonant || ""}
-      </span>
-      {/* Matra shown dimmed as hint */}
-      {matra && (
-        <span
-          className="text-xs sm:text-sm leading-none mt-0.5"
-          style={{
-            opacity: state === "empty" || state === "filled" ? 0.35 : 0.9,
-          }}
-        >
-          {matra}
+      {consonant ? (
+        /* Show combined syllable (consonant + matra) when user has entered a consonant */
+        <span className="text-2xl sm:text-3xl font-bold leading-none">
+          {consonant}{matra || ""}
         </span>
+      ) : (
+        /* Show just the matra as a dim hint when no consonant entered yet */
+        matra && (
+          <span
+            className="text-2xl sm:text-3xl leading-none"
+            style={{ opacity: 0.3 }}
+          >
+            {"◌"}{matra}
+          </span>
+        )
       )}
     </div>
   );
