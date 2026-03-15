@@ -12,7 +12,7 @@ interface GridProps {
   flipRow: number | null;
 }
 
-const WORD_LENGTH = 5;
+const WORD_LENGTH = 4;
 const MAX_GUESSES = 6;
 
 export default function Grid({

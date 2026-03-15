@@ -11,11 +11,11 @@ interface TileProps {
 }
 
 const stateColors: Record<LetterState, string> = {
-  correct: "bg-green-600 border-green-600 text-white",
-  present: "bg-yellow-500 border-yellow-500 text-white",
-  absent: "bg-gray-700 border-gray-700 text-white",
-  empty: "bg-transparent border-gray-600 text-white",
-  filled: "bg-transparent border-gray-400 text-white",
+  correct: "bg-[#2D8B46] border-[#2D8B46] text-white",
+  present: "bg-[#C4A000] border-[#C4A000] text-white",
+  absent: "bg-[#2A2040] border-[#2A2040] text-gray-400",
+  empty: "bg-transparent border-[#3D3260] text-white",
+  filled: "bg-transparent border-[#FF6B35]/60 text-white",
 };
 
 export default function Tile({
@@ -28,8 +28,8 @@ export default function Tile({
   isCurrent,
 }: TileProps) {
   const baseClass =
-    "flex flex-col items-center justify-center border-2 select-none relative overflow-hidden";
-  const sizeClass = "w-14 h-14 sm:w-16 sm:h-16";
+    "flex flex-col items-center justify-center border-2 select-none relative overflow-hidden rounded-lg";
+  const sizeClass = "w-16 h-16 sm:w-[4.5rem] sm:h-[4.5rem]";
 
   const colorClass = stateColors[state];
 
@@ -52,15 +52,15 @@ export default function Tile({
     >
       {consonant ? (
         /* Show combined syllable (consonant + matra) when user has entered a consonant */
-        <span className="text-2xl sm:text-3xl font-bold leading-none">
+        <span className="text-3xl sm:text-4xl font-bold leading-none">
           {consonant}{matra || ""}
         </span>
       ) : (
         /* Show just the matra as a dim hint when no consonant entered yet */
         matra && (
           <span
-            className="text-2xl sm:text-3xl leading-none"
-            style={{ opacity: 0.3 }}
+            className="text-3xl sm:text-4xl leading-none text-[#FF6B35]"
+            style={{ opacity: 0.35 }}
           >
             {"◌"}{matra}
           </span>

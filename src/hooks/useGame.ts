@@ -31,7 +31,7 @@ export interface UseGameReturn {
   dismissToast: () => void;
 }
 
-const WORD_LENGTH = 5;
+const WORD_LENGTH = 4;
 const MAX_GUESSES = 6;
 
 function evaluateGuess(guess: string[], target: Word): GuessResult[] {
