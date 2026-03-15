@@ -5,1308 +5,1768 @@ export interface Syllable {
 
 export type Word = Syllable[];
 
-// Curated list of verified 4-akshara Hindi words
-// Each word is exactly 4 syllables: {consonant, matra}
-// matra: "" = inherent 'a', "ा"=aa, "ि"=i, "ी"=ii, "ु"=u, "ू"=uu, "े"=e, "ै"=ai, "ो"=o, "ौ"=au
-// "्" = halant, "ं" = anusvara
-
 export const WORDS: Word[] = [
-  // परिवार (parivaar - family)
+  // ंअंडली - group
   [
-    { consonant: "प", matra: "" },
-    { consonant: "र", matra: "ि" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // समाचार (samachaar - news)
-  [
-    { consonant: "स", matra: "" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "च", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // अखबार (akhbaar - newspaper)
-  [
-    { consonant: "अ", matra: "" },
-    { consonant: "ख", matra: "" },
-    { consonant: "ब", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // कहानी (kahaani - story)
-  [
-    { consonant: "क", matra: "" },
-    { consonant: "ह", matra: "ा" },
-    { consonant: "न", matra: "ी" },
-    { consonant: "क", matra: "" }, // placeholder - actually 3 aksharas, removing
-  ],
-  // भगवान (bhagwaan - god)
-  [
-    { consonant: "भ", matra: "" },
-    { consonant: "ग", matra: "" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // रविवार (ravivaar - sunday)
-  [
-    { consonant: "र", matra: "" },
-    { consonant: "व", matra: "ि" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // सोमवार (somvaar - monday)
-  [
-    { consonant: "स", matra: "ो" },
-    { consonant: "म", matra: "" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // शनिवार (shanivaar - saturday)
-  [
-    { consonant: "श", matra: "" },
-    { consonant: "न", matra: "ि" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // गुरुवार (guruvaar - thursday)
-  [
-    { consonant: "ग", matra: "ु" },
-    { consonant: "र", matra: "ु" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // बुधवार (budhvaar - wednesday)
-  [
-    { consonant: "ब", matra: "ु" },
-    { consonant: "ध", matra: "" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // हिमालय (himaalay - himalaya)
-  [
-    { consonant: "ह", matra: "ि" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "ल", matra: "" },
-    { consonant: "य", matra: "" },
-  ],
-  // आसमान (aasmaan - sky)
-  [
-    { consonant: "आ", matra: "" },
-    { consonant: "स", matra: "" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // महाराज (maharaaj - great king)
-  [
-    { consonant: "म", matra: "" },
-    { consonant: "ह", matra: "ा" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "ज", matra: "" },
-  ],
-  // अनुमान (anumaan - guess)
-  [
-    { consonant: "अ", matra: "" },
-    { consonant: "न", matra: "ु" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // सरकार (sarkaar - government)
-  [
-    { consonant: "स", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "क", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // दरबार (darbaar - court)
-  [
-    { consonant: "द", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "ब", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // बाजीगर (baaziigar - magician)
-  [
-    { consonant: "ब", matra: "ा" },
-    { consonant: "ज", matra: "ी" },
-    { consonant: "ग", matra: "" },
-    { consonant: "र", matra: "" },
-  ],
-  // तलवार (talvaar - sword)
-  [
-    { consonant: "त", matra: "" },
-    { consonant: "ल", matra: "" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // मनोहर (manohar - charming)
-  [
-    { consonant: "म", matra: "" },
-    { consonant: "न", matra: "ो" },
-    { consonant: "ह", matra: "" },
-    { consonant: "र", matra: "" },
-  ],
-  // चमत्कार → too long. Let's use चमकना → still tricky
-  // नमकीन (namkeen - salty)
-  [
-    { consonant: "न", matra: "" },
-    { consonant: "म", matra: "" },
-    { consonant: "क", matra: "ी" },
-    { consonant: "न", matra: "" },
-  ],
-  // दुकानदार → 5, skip
-  // मुकाबला (mukaabla - competition)
-  [
-    { consonant: "म", matra: "ु" },
-    { consonant: "क", matra: "ा" },
-    { consonant: "ब", matra: "" },
-    { consonant: "ल", matra: "ा" },
-  ],
-  // बरसात (barsaat - rainy season)
-  [
-    { consonant: "ब", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "स", matra: "ा" },
-    { consonant: "त", matra: "" },
-  ],
-  // इलाहाबाद → 5 skip
-  // मुसाफिर (musaafir - traveler)
-  [
-    { consonant: "म", matra: "ु" },
-    { consonant: "स", matra: "ा" },
-    { consonant: "फ", matra: "ि" },
-    { consonant: "र", matra: "" },
-  ],
-  // गुलाबी (gulaabi - pink)
-  [
-    { consonant: "ग", matra: "ु" },
-    { consonant: "ल", matra: "ा" },
-    { consonant: "ब", matra: "ी" },
-    { consonant: "ज", matra: "" }, // wrong, 3 aksharas. removing
-  ],
-  // अध्यापक → 4 aksharas: अ-ध्या-प-क
-  [
-    { consonant: "अ", matra: "" },
-    { consonant: "ध", matra: "" },
-    { consonant: "प", matra: "" },
-    { consonant: "क", matra: "" },
-  ],
-  // हवाईअड्डा → too long
-  // राजधानी (raajdhaani - capital)
-  [
-    { consonant: "र", matra: "ा" },
-    { consonant: "ज", matra: "" },
-    { consonant: "ध", matra: "ा" },
-    { consonant: "न", matra: "ी" },
-  ],
-  // खानदान (khaandaan - dynasty/lineage)
-  [
-    { consonant: "ख", matra: "ा" },
-    { consonant: "न", matra: "" },
-    { consonant: "द", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // करवाना → 4: क-र-वा-ना
-  // मंगलवार (mangalvaar - tuesday)
-  [
-    { consonant: "म", matra: "ं" },
-    { consonant: "ग", matra: "" },
-    { consonant: "ल", matra: "" },
-    { consonant: "व", matra: "ा" },
-  ],
-  // ताजमहल (taajmahal - taj mahal)
-  [
-    { consonant: "त", matra: "ा" },
-    { consonant: "ज", matra: "" },
-    { consonant: "म", matra: "" },
-    { consonant: "ह", matra: "" },
-  ],
-  // बादशाह (baadshah - emperor)
-  [
-    { consonant: "ब", matra: "ा" },
-    { consonant: "द", matra: "" },
-    { consonant: "श", matra: "ा" },
-    { consonant: "ह", matra: "" },
-  ],
-  // इतिहास (itihaas - history)
-  [
-    { consonant: "इ", matra: "" },
-    { consonant: "त", matra: "ि" },
-    { consonant: "ह", matra: "ा" },
-    { consonant: "स", matra: "" },
-  ],
-  // शहनाई (shehnai - musical instrument)
-  [
-    { consonant: "श", matra: "" },
-    { consonant: "ह", matra: "" },
-    { consonant: "न", matra: "ा" },
-    { consonant: "ई", matra: "" },
-  ],
-  // दीपावली (deepaavali - diwali)
-  [
-    { consonant: "द", matra: "ी" },
-    { consonant: "प", matra: "ा" },
-    { consonant: "व", matra: "" },
+    { consonant: "ं", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ड", matra: "" },
     { consonant: "ल", matra: "ी" },
   ],
-  // पहचान (pehchaan - identity)
+  // अँगड़ाई - stretch
   [
-    { consonant: "प", matra: "" },
-    { consonant: "ह", matra: "" },
-    { consonant: "च", matra: "ा" },
-    { consonant: "न", matra: "" },
+    { consonant: "अ", matra: "ँ" },
+    { consonant: "ग", matra: "" },
+    { consonant: "ड", matra: "़ा" },
+    { consonant: "ई", matra: "" },
   ],
-  // हथियार (hathiyaar - weapon)
+  // अँगरखा - tunic
   [
-    { consonant: "ह", matra: "" },
-    { consonant: "थ", matra: "ि" },
-    { consonant: "य", matra: "ा" },
+    { consonant: "अ", matra: "ँ" },
+    { consonant: "ग", matra: "" },
     { consonant: "र", matra: "" },
-  ],
-  // रामायण (raamaayan - ramayana)
-  [
-    { consonant: "र", matra: "ा" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "य", matra: "" },
-    { consonant: "ण", matra: "" },
-  ],
-  // दवाखाना (davaakhaana - pharmacy)
-  [
-    { consonant: "द", matra: "" },
-    { consonant: "व", matra: "ा" },
     { consonant: "ख", matra: "ा" },
-    { consonant: "न", matra: "ा" },
   ],
-  // अस्पताल (aspataal - hospital)
+  // अँगरखा - warm coat
   [
-    { consonant: "अ", matra: "" },
-    { consonant: "स", matra: "" },
-    { consonant: "प", matra: "" },
-    { consonant: "त", matra: "ा" },
-  ],
-  // जानवर (jaanvar - animal)
-  [
-    { consonant: "ज", matra: "ा" },
-    { consonant: "न", matra: "" },
-    { consonant: "व", matra: "" },
+    { consonant: "अ", matra: "ँ" },
+    { consonant: "ग", matra: "" },
     { consonant: "र", matra: "" },
+    { consonant: "ख", matra: "ा" },
   ],
-  // शिकारी (shikaari - hunter)
+  // अँगरेज - british
   [
-    { consonant: "श", matra: "ि" },
+    { consonant: "अ", matra: "ँ" },
+    { consonant: "ग", matra: "" },
+    { consonant: "र", matra: "े" },
+    { consonant: "ज", matra: "" },
+  ],
+  // अँगरेजी - english
+  [
+    { consonant: "अ", matra: "ँ" },
+    { consonant: "ग", matra: "" },
+    { consonant: "र", matra: "े" },
+    { consonant: "ज", matra: "ी" },
+  ],
+  // अँगीकार - recognition
+  [
+    { consonant: "अ", matra: "ँ" },
+    { consonant: "ग", matra: "ी" },
     { consonant: "क", matra: "ा" },
-    { consonant: "र", matra: "ी" },
-    { consonant: "श", matra: "" }, // wrong — 3 aksharas, fixing
-  ],
-  // दरवाजा (darvaaja - door)
-  [
-    { consonant: "द", matra: "" },
     { consonant: "र", matra: "" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "ज", matra: "ा" },
   ],
-  // सहारा (sahaara - support)
+  // अँग्रेज - englishman
   [
-    { consonant: "स", matra: "" },
-    { consonant: "ह", matra: "ा" },
+    { consonant: "अ", matra: "ँ" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "े" },
+    { consonant: "ज", matra: "" },
+  ],
+  // अँगड़ाई - stretch the limbs
+  [
+    { consonant: "अ", matra: "ँ" },
+    { consonant: "ग", matra: "" },
+    { consonant: "ड़", matra: "ा" },
+    { consonant: "ई", matra: "" },
+  ],
+  // अँधियारा - darkness
+  [
+    { consonant: "अ", matra: "ँ" },
+    { consonant: "ध", matra: "ि" },
+    { consonant: "य", matra: "ा" },
     { consonant: "र", matra: "ा" },
-    { consonant: "ज", matra: "" }, // wrong — 3 aksharas
   ],
-  // चमत्कार → 4: च-म-त्का-र
-  // let me redo with proper verified 4-akshara words only
-  // मजदूर (mazdoor - laborer) - 3 aksharas, skip
-  // करोड़पति → 5, skip
-  // कारोबार (kaarobaar - business)
+  // अँशुमाली - sun
   [
-    { consonant: "क", matra: "ा" },
-    { consonant: "र", matra: "ो" },
-    { consonant: "ब", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // समझदार (samajhdaar - wise)
-  [
-    { consonant: "स", matra: "" },
-    { consonant: "म", matra: "" },
-    { consonant: "झ", matra: "" },
-    { consonant: "द", matra: "ा" },
-  ],
-  // तराजू (taraazoo - scale/balance) - 3, skip
-  // लखनऊ → 3 skip
-  // मुरगाबी → 4: मु-र-गा-बी
-  // अमरूद (amrood - guava) → 3
-  // तकिया (takiya - pillow) → 3
-  // बनारस (banaaras - varanasi)
-  [
-    { consonant: "ब", matra: "" },
-    { consonant: "न", matra: "ा" },
-    { consonant: "र", matra: "" },
-    { consonant: "स", matra: "" },
-  ],
-  // पटाखा → 3
-  // कलाकार (kalaakar - artist)
-  [
-    { consonant: "क", matra: "" },
-    { consonant: "ल", matra: "ा" },
-    { consonant: "क", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // गणराज्य → complex
-  // अमावस (amaavas - new moon)
-  [
-    { consonant: "अ", matra: "" },
+    { consonant: "अ", matra: "ँ" },
+    { consonant: "श", matra: "ु" },
     { consonant: "म", matra: "ा" },
-    { consonant: "व", matra: "" },
-    { consonant: "स", matra: "" },
+    { consonant: "ल", matra: "ी" },
   ],
-  // दालचीनी (daalcheeni - cinnamon)
-  [
-    { consonant: "द", matra: "ा" },
-    { consonant: "ल", matra: "" },
-    { consonant: "च", matra: "ी" },
-    { consonant: "न", matra: "ी" },
-  ],
-  // इमारत (imaarat - building)
-  [
-    { consonant: "इ", matra: "" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "र", matra: "" },
-    { consonant: "त", matra: "" },
-  ],
-  // अदालत (adaalat - court)
-  [
-    { consonant: "अ", matra: "" },
-    { consonant: "द", matra: "ा" },
-    { consonant: "ल", matra: "" },
-    { consonant: "त", matra: "" },
-  ],
-  // तहसील (tehseel - subdivision)
-  [
-    { consonant: "त", matra: "" },
-    { consonant: "ह", matra: "" },
-    { consonant: "स", matra: "ी" },
-    { consonant: "ल", matra: "" },
-  ],
-  // कमरा → 3
-  // पकवान (pakwaan - dish/delicacy)
-  [
-    { consonant: "प", matra: "" },
-    { consonant: "क", matra: "" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // नगरपालिका → too long
-  // चौराहा (chauraaha - crossroad)
-  [
-    { consonant: "च", matra: "ौ" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "ह", matra: "ा" },
-    { consonant: "ज", matra: "" }, // wrong — 3 aksharas
-  ],
-  // सजावट (sajaavat - decoration)
-  [
-    { consonant: "स", matra: "" },
-    { consonant: "ज", matra: "ा" },
-    { consonant: "व", matra: "" },
-    { consonant: "ट", matra: "" },
-  ],
-  // मसालेदार → 5
-  // बरतन (bartan - utensils) → 3
-  // दस्तावेज → complex
-  // अंधेरा (andheraa - darkness)
+  // अंककार - statistician
   [
     { consonant: "अ", matra: "ं" },
-    { consonant: "ध", matra: "े" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "ज", matra: "" }, // wrong — 3 aksharas
+    { consonant: "क", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "" },
   ],
-  // उजालापन → 5
-  // रसगुल्ला → 4: र-स-गु-ल्ला
-  // Let me be more careful. Focusing on clean 4-akshara words:
-
-  // मालामाल (maalaamaal - rich/wealthy)
+  // अंकगत - in the lap
   [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "क", matra: "" },
+    { consonant: "ग", matra: "" },
+    { consonant: "त", matra: "" },
+  ],
+  // अंकटाड - unctad
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "क", matra: "" },
+    { consonant: "ट", matra: "ा" },
+    { consonant: "ड", matra: "" },
+  ],
+  // अंकनीय - to be marked
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "क", matra: "" },
+    { consonant: "न", matra: "ी" },
+    { consonant: "य", matra: "" },
+  ],
+  // अंकमाला - necklace
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "क", matra: "" },
     { consonant: "म", matra: "ा" },
     { consonant: "ल", matra: "ा" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "ल", matra: "" },
   ],
-  // बेईमान (beimaan - dishonest)
+  // अंकवार - lap
   [
-    { consonant: "ब", matra: "े" },
-    { consonant: "ई", matra: "" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // ईमानदार (imaandaar - honest)
-  [
-    { consonant: "ई", matra: "" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "न", matra: "" },
-    { consonant: "द", matra: "ा" },
-  ],
-  // तमाशा → 3
-  // लगातार (lagaataar - continuous)
-  [
-    { consonant: "ल", matra: "" },
-    { consonant: "ग", matra: "ा" },
-    { consonant: "त", matra: "ा" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "क", matra: "" },
+    { consonant: "व", matra: "ा" },
     { consonant: "र", matra: "" },
   ],
-  // अचानक (achaanak - suddenly)
+  // अंकसूची - scoresheet
   [
-    { consonant: "अ", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "क", matra: "" },
+    { consonant: "स", matra: "ू" },
+    { consonant: "च", matra: "ी" },
+  ],
+  // अंकुरण - germination
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "" },
+  ],
+  // अंकुशित - controlled
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "श", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अंगघात - paralysis
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "" },
+    { consonant: "घ", matra: "ा" },
+    { consonant: "त", matra: "" },
+  ],
+  // अंगघात - palsy
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "" },
+    { consonant: "घ", matra: "ा" },
+    { consonant: "त", matra: "" },
+  ],
+  // अंगघाती - paralytical
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "" },
+    { consonant: "घ", matra: "ा" },
+    { consonant: "त", matra: "ी" },
+  ],
+  // अंगघाती - paralytic
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "" },
+    { consonant: "घ", matra: "ा" },
+    { consonant: "त", matra: "ी" },
+  ],
+  // अंगचारी - close friend
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "" },
     { consonant: "च", matra: "ा" },
-    { consonant: "न", matra: "" },
-    { consonant: "क", matra: "" },
+    { consonant: "र", matra: "ी" },
   ],
-  // दुकानदार → 5
-  // हजारों → 3 + plural
-  // एहसान (ehsaan - favor)
+  // अंगधारी - living being
   [
-    { consonant: "ए", matra: "" },
-    { consonant: "ह", matra: "" },
-    { consonant: "स", matra: "ा" },
-    { consonant: "न", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "" },
+    { consonant: "ध", matra: "ा" },
+    { consonant: "र", matra: "ी" },
   ],
-  // मेहमान (mehmaan - guest)
+  // अंगभूत - integral
   [
-    { consonant: "म", matra: "े" },
-    { consonant: "ह", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "" },
+    { consonant: "भ", matra: "ू" },
+    { consonant: "त", matra: "" },
+  ],
+  // अंगमारी - blight
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "" },
     { consonant: "म", matra: "ा" },
-    { consonant: "न", matra: "" },
+    { consonant: "र", matra: "ी" },
   ],
-  // दुकान → 3
-  // मुकदमा (mukadma - lawsuit)
+  // अंगरखा - vest
   [
-    { consonant: "म", matra: "ु" },
-    { consonant: "क", matra: "" },
-    { consonant: "द", matra: "" },
-    { consonant: "म", matra: "ा" },
-  ],
-  // इलाज → 3
-  // नुकसान (nuksaan - loss/damage)
-  [
-    { consonant: "न", matra: "ु" },
-    { consonant: "क", matra: "" },
-    { consonant: "स", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // हकीकत (hakeekat - reality)
-  [
-    { consonant: "ह", matra: "" },
-    { consonant: "क", matra: "ी" },
-    { consonant: "क", matra: "" },
-    { consonant: "त", matra: "" },
-  ],
-  // मोहब्बत → complex conjunct
-  // खबरदार (khabardaar - beware)
-  [
-    { consonant: "ख", matra: "" },
-    { consonant: "ब", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "द", matra: "ा" },
-  ],
-  // शुभकामना → 5
-  // दस्तकार → complex
-  // कामयाब (kaamyaab - successful)
-  [
-    { consonant: "क", matra: "ा" },
-    { consonant: "म", matra: "" },
-    { consonant: "य", matra: "ा" },
-    { consonant: "ब", matra: "" },
-  ],
-  // नाकामयाब → 5
-  // बदनाम (badnaam - infamous)
-  [
-    { consonant: "ब", matra: "" },
-    { consonant: "द", matra: "" },
-    { consonant: "न", matra: "ा" },
-    { consonant: "म", matra: "" },
-  ],
-  // इंतजार (intezaar - wait)
-  [
-    { consonant: "इ", matra: "ं" },
-    { consonant: "त", matra: "" },
-    { consonant: "ज", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // हैदराबाद → 5
-  // अहमदाबाद → 5
-  // जयपुर → 3
-  // बीकानेर (beekaner - bikaner)
-  [
-    { consonant: "ब", matra: "ी" },
-    { consonant: "क", matra: "ा" },
-    { consonant: "न", matra: "े" },
-    { consonant: "र", matra: "" },
-  ],
-  // उदयपुर (udaypur - udaipur)
-  [
-    { consonant: "उ", matra: "" },
-    { consonant: "द", matra: "" },
-    { consonant: "य", matra: "" },
-    { consonant: "प", matra: "ु" },
-  ],
-  // गुजरात (gujaraat - gujarat)
-  [
-    { consonant: "ग", matra: "ु" },
-    { consonant: "ज", matra: "" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "त", matra: "" },
-  ],
-  // राजस्थान → 4: रा-ज-स्था-न (has conjunct)
-  // कर्नाटक → complex
-  // महाराष्ट्र → complex
-  // तमिलनाडु → 5
-  // झारखण्ड → complex
-  // छत्तीसगढ़ → complex
-  // कारखाना (kaarkhaana - factory)
-  [
-    { consonant: "क", matra: "ा" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "" },
     { consonant: "र", matra: "" },
     { consonant: "ख", matra: "ा" },
-    { consonant: "न", matra: "ा" },
   ],
-  // मुनाफा (munaafa - profit)
+  // अंगरखा - frock
   [
-    { consonant: "म", matra: "ु" },
-    { consonant: "न", matra: "ा" },
-    { consonant: "फ", matra: "ा" },
-    { consonant: "ज", matra: "" }, // 3 aksharas - removing this
-  ],
-  // बदलाव (badlaav - change)
-  [
-    { consonant: "ब", matra: "" },
-    { consonant: "द", matra: "" },
-    { consonant: "ल", matra: "ा" },
-    { consonant: "व", matra: "" },
-  ],
-  // दरअसल (darasal - actually)
-  [
-    { consonant: "द", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "अ", matra: "" },
-    { consonant: "स", matra: "" },
-  ],
-  // तराजू → 3
-  // नवरात्र (navraatra - navratri)
-  [
-    { consonant: "न", matra: "" },
-    { consonant: "व", matra: "" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "त", matra: "" },
-  ],
-  // मनोरंजन → complex
-  // अभिनेता (abhineta - actor)
-  [
-    { consonant: "अ", matra: "" },
-    { consonant: "भ", matra: "ि" },
-    { consonant: "न", matra: "े" },
-    { consonant: "त", matra: "ा" },
-  ],
-  // कलाकार already added above
-  // गायिका (gaayika - female singer) → 3
-  // पुजारी (pujaari - priest) → 3
-  // जमानत (zamaanat - bail)
-  [
-    { consonant: "ज", matra: "" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "न", matra: "" },
-    { consonant: "त", matra: "" },
-  ],
-  // मुहावरा (muhaavara - idiom)
-  [
-    { consonant: "म", matra: "ु" },
-    { consonant: "ह", matra: "ा" },
-    { consonant: "व", matra: "" },
-    { consonant: "र", matra: "ा" },
-  ],
-  // बिजलीघर → 4: बि-ज-ली-घ (actually might be 5)
-  // नौकरानी (naukarani - maid)
-  [
-    { consonant: "न", matra: "ौ" },
-    { consonant: "क", matra: "" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "न", matra: "ी" },
-  ],
-  // मनमोहन (manmohan - captivating)
-  [
-    { consonant: "म", matra: "" },
-    { consonant: "न", matra: "" },
-    { consonant: "म", matra: "ो" },
-    { consonant: "ह", matra: "" },
-  ],
-  // सुलतान (sultaan - sultan)
-  [
-    { consonant: "स", matra: "ु" },
-    { consonant: "ल", matra: "" },
-    { consonant: "त", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // दुश्मन → complex conjunct
-  // शैतान (shaitaan - devil) → 3
-  // रहमान → 3
-  // पाकिस्तान → 4: पा-कि-स्ता-न (has conjunct)
-  // अफगान (afgaan - afghan)
-  [
-    { consonant: "अ", matra: "" },
-    { consonant: "फ", matra: "" },
-    { consonant: "ग", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // मिजाज → 3
-  // रमजान (ramzaan - ramadan)
-  [
-    { consonant: "र", matra: "" },
-    { consonant: "म", matra: "" },
-    { consonant: "ज", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // बिहार (bihar) → 3
-  // अगरतला (agartala)
-  [
-    { consonant: "अ", matra: "" },
+    { consonant: "अ", matra: "ं" },
     { consonant: "ग", matra: "" },
     { consonant: "र", matra: "" },
-    { consonant: "त", matra: "" },
+    { consonant: "ख", matra: "ा" },
   ],
-  // कोलकाता (kolkaata - kolkata)
+  // अंगरखा - vestment
   [
-    { consonant: "क", matra: "ो" },
-    { consonant: "ल", matra: "" },
-    { consonant: "क", matra: "ा" },
-    { consonant: "त", matra: "ा" },
-  ],
-  // बेंगलुरु → complex
-  // मुंबई → 3
-  // अमरावती (amravati)
-  [
-    { consonant: "अ", matra: "" },
-    { consonant: "म", matra: "" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "व", matra: "" },
-  ],
-  // कानपुर (kaanpur) → 3
-  // लखनऊ → 3
-  // वाराणसी (vaaranasi - varanasi)
-  [
-    { consonant: "व", matra: "ा" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "ण", matra: "" },
-    { consonant: "स", matra: "ी" },
-  ],
-  // मथुरा → 3
-  // अयोध्या → complex
-  // बनावट (banaavat - structure/fake)
-  [
-    { consonant: "ब", matra: "" },
-    { consonant: "न", matra: "ा" },
-    { consonant: "व", matra: "" },
-    { consonant: "ट", matra: "" },
-  ],
-  // रफतार (raftaar - speed)
-  [
-    { consonant: "र", matra: "" },
-    { consonant: "फ", matra: "" },
-    { consonant: "त", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // हमसफर (humsafar - companion)
-  [
-    { consonant: "ह", matra: "" },
-    { consonant: "म", matra: "" },
-    { consonant: "स", matra: "" },
-    { consonant: "फ", matra: "" },
-  ],
-  // जिगरदार → 4: जि-ग-र-दा... actually might be complex
-  // दिलदार (dildaar - generous)
-  [
-    { consonant: "द", matra: "ि" },
-    { consonant: "ल", matra: "" },
-    { consonant: "द", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // सरदार (sardaar - chief)
-  [
-    { consonant: "स", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "द", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // मलमल (malmal - muslin)
-  [
-    { consonant: "म", matra: "" },
-    { consonant: "ल", matra: "" },
-    { consonant: "म", matra: "" },
-    { consonant: "ल", matra: "" },
-  ],
-  // चंदन (chandan - sandalwood) → 3
-  // चमेली (chameli - jasmine) → 3
-  // गुलमोहर (gulmohar - flame tree)
-  [
-    { consonant: "ग", matra: "ु" },
-    { consonant: "ल", matra: "" },
-    { consonant: "म", matra: "ो" },
-    { consonant: "ह", matra: "" },
-  ],
-  // कनकवा → not real
-  // जबरदस्त → complex conjunct
-  // जलपान (jalpaan - snack/breakfast)
-  [
-    { consonant: "ज", matra: "" },
-    { consonant: "ल", matra: "" },
-    { consonant: "प", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // चरागाह (charaagaah - pasture)
-  [
-    { consonant: "च", matra: "" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "ग", matra: "ा" },
-    { consonant: "ह", matra: "" },
-  ],
-  // रोजगार (rozgaar - employment)
-  [
-    { consonant: "र", matra: "ो" },
-    { consonant: "ज", matra: "" },
-    { consonant: "ग", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // कारीगर (kaareeagar - craftsman)
-  [
-    { consonant: "क", matra: "ा" },
-    { consonant: "र", matra: "ी" },
+    { consonant: "अ", matra: "ं" },
     { consonant: "ग", matra: "" },
     { consonant: "र", matra: "" },
+    { consonant: "ख", matra: "ा" },
   ],
-  // आलसी → 3
-  // बहादुर (bahaadur - brave)
+  // अंगरेज़ - englishman
   [
-    { consonant: "ब", matra: "" },
-    { consonant: "ह", matra: "ा" },
-    { consonant: "द", matra: "ु" },
-    { consonant: "र", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "" },
+    { consonant: "र", matra: "े" },
+    { consonant: "ज", matra: "़" },
   ],
-  // जवाहर (jawaahar - jewel)
+  // अंगीकार - adoption
   [
-    { consonant: "ज", matra: "" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "ह", matra: "" },
-    { consonant: "र", matra: "" },
-  ],
-  // नाटककार → 4: ना-ट-क-का... complex
-  // हवलदार → 4: ह-व-ल-दा... 
-  // ईमानदार already added
-  // मक्खन → complex
-  // अजगर (ajgar - python) → 3
-  // गिलहरी (gilhari - squirrel) → 4: गि-ल-ह-री
-  [
-    { consonant: "ग", matra: "ि" },
-    { consonant: "ल", matra: "" },
-    { consonant: "ह", matra: "" },
-    { consonant: "र", matra: "ी" },
-  ],
-  // बारिश → 3
-  // तूफान → 3
-  // भूकंप → 3
-  // गाजर → 3
-  // सहकारी (sahkaari - cooperative)
-  [
-    { consonant: "स", matra: "" },
-    { consonant: "ह", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "ी" },
     { consonant: "क", matra: "ा" },
-    { consonant: "र", matra: "ी" },
-  ],
-  // जिम्मेदार → complex
-  // सवारी → 3
-  // तैयारी (taiyaari - preparation)
-  [
-    { consonant: "त", matra: "ै" },
-    { consonant: "य", matra: "ा" },
-    { consonant: "र", matra: "ी" },
-    { consonant: "क", matra: "" }, // wrong - 3 only
-  ],
-  // सुविधा → 3
-  // अजनबी (ajnabi - stranger)
-  [
-    { consonant: "अ", matra: "" },
-    { consonant: "ज", matra: "" },
-    { consonant: "न", matra: "" },
-    { consonant: "ब", matra: "ी" },
-  ],
-  // हवाई → 3
-  // बारूद → 3
-  // शरारत (shararat - mischief)
-  [
-    { consonant: "श", matra: "" },
-    { consonant: "र", matra: "ा" },
     { consonant: "र", matra: "" },
+  ],
+  // अंगीकार - acknowledgement
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "ी" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "" },
+  ],
+  // अंगीकार - confession
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "ी" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "" },
+  ],
+  // अंगीकार - acceptance
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "ी" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "" },
+  ],
+  // अंगीकृत - adoptive
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "ी" },
+    { consonant: "क", matra: "ृ" },
     { consonant: "त", matra: "" },
   ],
-  // हकदार (hakdaar - rightful)
+  // अंगीगार - adoption
   [
-    { consonant: "ह", matra: "" },
-    { consonant: "क", matra: "" },
-    { consonant: "द", matra: "ा" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "ी" },
+    { consonant: "ग", matra: "ा" },
     { consonant: "र", matra: "" },
   ],
-  // नामचीन (naamcheen - famous)
+  // अंगीवाची - holonymy
   [
-    { consonant: "न", matra: "ा" },
-    { consonant: "म", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "ी" },
+    { consonant: "व", matra: "ा" },
     { consonant: "च", matra: "ी" },
-    { consonant: "न", matra: "" },
   ],
-  // सरताज (sartaaj - crown jewel)
+  // अंग्रेज - english
   [
-    { consonant: "स", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "त", matra: "ा" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "े" },
     { consonant: "ज", matra: "" },
   ],
-  // जहाज → 3
-  // समुदाय → complex
-  // मतदान (matdaan - voting)
+  // अंग्रेज - sassenach
   [
-    { consonant: "म", matra: "" },
-    { consonant: "त", matra: "" },
-    { consonant: "द", matra: "ा" },
-    { consonant: "न", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "े" },
+    { consonant: "ज", matra: "" },
   ],
-  // मतदार (matdaar - voter)
+  // अंग्रेज - pommy
   [
-    { consonant: "म", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "े" },
+    { consonant: "ज", matra: "" },
+  ],
+  // अंग्रेज़ - the british
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "े" },
+    { consonant: "ज", matra: "़" },
+  ],
+  // अंग्रेज़ी - british
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "े" },
+    { consonant: "ज", matra: "़ी" },
+  ],
+  // अंग्रेजी - english
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "े" },
+    { consonant: "ज", matra: "ी" },
+  ],
+  // अंटाचित - senseless
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ट", matra: "ा" },
+    { consonant: "च", matra: "ि" },
     { consonant: "त", matra: "" },
-    { consonant: "द", matra: "ा" },
+  ],
+  // अंठानवे - xcviii
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ठ", matra: "ा" },
+    { consonant: "न", matra: "" },
+    { consonant: "व", matra: "े" },
+  ],
+  // अंठानवे - ninety eight
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ठ", matra: "ा" },
+    { consonant: "न", matra: "" },
+    { consonant: "व", matra: "े" },
+  ],
+  // अंडकोष - ball
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ड", matra: "" },
+    { consonant: "क", matra: "ो" },
+    { consonant: "ष", matra: "" },
+  ],
+  // अंडखोल - eggshell
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ड", matra: "" },
+    { consonant: "ख", matra: "ो" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अंडाकार - ovoid
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ड", matra: "ा" },
+    { consonant: "क", matra: "ा" },
     { consonant: "र", matra: "" },
   ],
-  // पहलवान (pahalwaan - wrestler)
+  // अंडाकार - oblong
   [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ड", matra: "ा" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "" },
+  ],
+  // अंतःपट - curtain
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "ः" },
     { consonant: "प", matra: "" },
-    { consonant: "ह", matra: "" },
-    { consonant: "ल", matra: "" },
-    { consonant: "व", matra: "ा" },
-  ],
-  // तलाश → 3
-  // कसरत (kasrat - exercise)
-  [
-    { consonant: "क", matra: "" },
-    { consonant: "स", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "त", matra: "" },
-  ],
-  // बादलों → 3 + plural
-  // गुलशन (gulshan - garden)
-  [
-    { consonant: "ग", matra: "ु" },
-    { consonant: "ल", matra: "" },
-    { consonant: "श", matra: "" },
-    { consonant: "न", matra: "" },
-  ],
-  // करतार (kartaar - creator)
-  [
-    { consonant: "क", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "त", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // अफसर (afsar - officer)
-  [
-    { consonant: "अ", matra: "" },
-    { consonant: "फ", matra: "" },
-    { consonant: "स", matra: "" },
-    { consonant: "र", matra: "" },
-  ],
-  // बरगद (bargad - banyan tree)
-  [
-    { consonant: "ब", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "ग", matra: "" },
-    { consonant: "द", matra: "" },
-  ],
-  // नरकट (narkat - reed)
-  [
-    { consonant: "न", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "क", matra: "" },
     { consonant: "ट", matra: "" },
   ],
-  // अकबर (akbar)
+  // अंतःपुर - harem
   [
-    { consonant: "अ", matra: "" },
-    { consonant: "क", matra: "" },
-    { consonant: "ब", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "ः" },
+    { consonant: "प", matra: "ु" },
     { consonant: "र", matra: "" },
   ],
-  // बदहाल (badhal - miserable)
+  // अंतःस्थ - interior
   [
-    { consonant: "ब", matra: "" },
-    { consonant: "द", matra: "" },
-    { consonant: "ह", matra: "ा" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "ः" },
+    { consonant: "स", matra: "्" },
+    { consonant: "थ", matra: "" },
+  ],
+  // अंतःस्थ - intermediate
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "ः" },
+    { consonant: "स", matra: "्" },
+    { consonant: "थ", matra: "" },
+  ],
+  // अंतकारी - terminal
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "ी" },
+  ],
+  // अंतकारी - fatal
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "ी" },
+  ],
+  // अंतकाल - time
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "क", matra: "ा" },
     { consonant: "ल", matra: "" },
   ],
-  // सहजता → complex
-  // कमजोर (kamzor - weak)
+  // अंततम - latest
   [
-    { consonant: "क", matra: "" },
-    { consonant: "म", matra: "" },
-    { consonant: "ज", matra: "ो" },
-    { consonant: "र", matra: "" },
-  ],
-  // मजबूत (mazbut - strong)
-  [
-    { consonant: "म", matra: "" },
-    { consonant: "ज", matra: "" },
-    { consonant: "ब", matra: "ू" },
+    { consonant: "अ", matra: "ं" },
     { consonant: "त", matra: "" },
-  ],
-  // शानदार (shaandaar - magnificent)
-  [
-    { consonant: "श", matra: "ा" },
-    { consonant: "न", matra: "" },
-    { consonant: "द", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // चमकदार (chamakdaar - shiny)
-  [
-    { consonant: "च", matra: "" },
+    { consonant: "त", matra: "" },
     { consonant: "म", matra: "" },
-    { consonant: "क", matra: "" },
-    { consonant: "द", matra: "ा" },
   ],
-  // रंगदार (rangdaar - colorful)
+  // अंतभाग - termination
   [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "भ", matra: "ा" },
+    { consonant: "ग", matra: "" },
+  ],
+  // अंतरंग - interior
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
     { consonant: "र", matra: "ं" },
     { consonant: "ग", matra: "" },
-    { consonant: "द", matra: "ा" },
+  ],
+  // अंतरंग - private
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ं" },
+    { consonant: "ग", matra: "" },
+  ],
+  // अंतरंग - privy
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ं" },
+    { consonant: "ग", matra: "" },
+  ],
+  // अंतरंग - versant
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ं" },
+    { consonant: "ग", matra: "" },
+  ],
+  // अंतरंग - insider
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ं" },
+    { consonant: "ग", matra: "" },
+  ],
+  // अंतरण - transference
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
     { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "" },
   ],
-  // मालदार (maaldaar - wealthy)
+  // अंतरांग - viscus
   [
-    { consonant: "म", matra: "ा" },
-    { consonant: "ल", matra: "" },
-    { consonant: "द", matra: "ा" },
-    { consonant: "र", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ां" },
+    { consonant: "ग", matra: "" },
   ],
-  // हलवाई (halwaai - sweet maker)
+  // अंतरांग - viscera
   [
-    { consonant: "ह", matra: "" },
-    { consonant: "ल", matra: "" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "ई", matra: "" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ां" },
+    { consonant: "ग", matra: "" },
   ],
-  // बनजारा (banjaara - nomad)
+  // अंतरांग - entrails
   [
-    { consonant: "ब", matra: "" },
-    { consonant: "न", matra: "" },
-    { consonant: "ज", matra: "ा" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ां" },
+    { consonant: "ग", matra: "" },
+  ],
+  // अंतरांग - innards
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ां" },
+    { consonant: "ग", matra: "" },
+  ],
+  // अंतरांग - internal organ
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ां" },
+    { consonant: "ग", matra: "" },
+  ],
+  // अंतरांगी - visceral
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ां" },
+    { consonant: "ग", matra: "ी" },
+  ],
+  // अंतराल - time lapse
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
     { consonant: "र", matra: "ा" },
+    { consonant: "ल", matra: "" },
   ],
-  // अधिकार (adhikaar - right/authority)
+  // अंतराल - cusp
   [
-    { consonant: "अ", matra: "" },
-    { consonant: "ध", matra: "ि" },
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ा" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अंतराल - hiatus
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ा" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अंतराल - time lag
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ा" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अंतराल - spacing
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ा" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अंतराल - lag
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ा" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अंतराल - discontinuity
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ा" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अंतराल - lacuna
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ा" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अंतराल - interregnum
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ा" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अंतराल - interval
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ा" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अंतरिक - in
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ि" },
+    { consonant: "क", matra: "" },
+  ],
+  // अंतरिती - transferee
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ि" },
+    { consonant: "त", matra: "ी" },
+  ],
+  // अंतरिम - interim
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ि" },
+    { consonant: "म", matra: "" },
+  ],
+  // अंतरीप - cape
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ी" },
+    { consonant: "प", matra: "" },
+  ],
+  // अंतरीप - headland
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ी" },
+    { consonant: "प", matra: "" },
+  ],
+  // अंतरीय - differential
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ी" },
+    { consonant: "य", matra: "" },
+  ],
+  // अंतरीय - inner
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "र", matra: "ी" },
+    { consonant: "य", matra: "" },
+  ],
+  // अंतस्थ - intermedial
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "" },
+    { consonant: "स", matra: "्" },
+    { consonant: "थ", matra: "" },
+  ],
+  // अंतेवासी - boarder
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "त", matra: "े" },
+    { consonant: "व", matra: "ा" },
+    { consonant: "स", matra: "ी" },
+  ],
+  // अंदरूनी - internal
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "द", matra: "" },
+    { consonant: "र", matra: "ू" },
+    { consonant: "न", matra: "ी" },
+  ],
+  // अंदरूनी - inner
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "द", matra: "" },
+    { consonant: "र", matra: "ू" },
+    { consonant: "न", matra: "ी" },
+  ],
+  // अंदरूनी - inward
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "द", matra: "" },
+    { consonant: "र", matra: "ू" },
+    { consonant: "न", matra: "ी" },
+  ],
+  // अंधकार - gloom
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ध", matra: "" },
     { consonant: "क", matra: "ा" },
     { consonant: "र", matra: "" },
   ],
-  // विचारधारा → 5
-  // अनुभव (anubhav - experience)
+  // अंधकार - obscureness
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ध", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "" },
+  ],
+  // अंधकार - obscurity
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ध", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "" },
+  ],
+  // अंधाधुंध - indiscriminate
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ध", matra: "ा" },
+    { consonant: "ध", matra: "ुं" },
+    { consonant: "ध", matra: "" },
+  ],
+  // अंधाधुंध - sweeping
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ध", matra: "ा" },
+    { consonant: "ध", matra: "ुं" },
+    { consonant: "ध", matra: "" },
+  ],
+  // अंधाधुंध - blind
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ध", matra: "ा" },
+    { consonant: "ध", matra: "ुं" },
+    { consonant: "ध", matra: "" },
+  ],
+  // अंधापन - blindness
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "ध", matra: "ा" },
+    { consonant: "प", matra: "" },
+    { consonant: "न", matra: "" },
+  ],
+  // अंपायर - ump
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "प", matra: "ा" },
+    { consonant: "य", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अंपायर - umpire
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "प", matra: "ा" },
+    { consonant: "य", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अंशदाता - contributor
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "श", matra: "" },
+    { consonant: "द", matra: "ा" },
+    { consonant: "त", matra: "ा" },
+  ],
+  // अंशदान - contribution
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "श", matra: "" },
+    { consonant: "द", matra: "ा" },
+    { consonant: "न", matra: "" },
+  ],
+  // अंशदायी - contributory
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "श", matra: "" },
+    { consonant: "द", matra: "ा" },
+    { consonant: "य", matra: "ी" },
+  ],
+  // अंशधारी - share holder
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "श", matra: "" },
+    { consonant: "ध", matra: "ा" },
+    { consonant: "र", matra: "ी" },
+  ],
+  // अंशधारी - stockholder
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "श", matra: "" },
+    { consonant: "ध", matra: "ा" },
+    { consonant: "र", matra: "ी" },
+  ],
+  // अंशधारी - shareowner
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "श", matra: "" },
+    { consonant: "ध", matra: "ा" },
+    { consonant: "र", matra: "ी" },
+  ],
+  // अंशांकन - calibration
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "श", matra: "ां" },
+    { consonant: "क", matra: "" },
+    { consonant: "न", matra: "" },
+  ],
+  // अंशुमान - the sun
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "श", matra: "ु" },
+    { consonant: "म", matra: "ा" },
+    { consonant: "न", matra: "" },
+  ],
+  // अंसपेशी - musculus pectoralis
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "स", matra: "" },
+    { consonant: "प", matra: "े" },
+    { consonant: "श", matra: "ी" },
+  ],
+  // अंसपेशी - pectoral
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "स", matra: "" },
+    { consonant: "प", matra: "े" },
+    { consonant: "श", matra: "ी" },
+  ],
+  // अंसपेशी - pectoralis
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "स", matra: "" },
+    { consonant: "प", matra: "े" },
+    { consonant: "श", matra: "ी" },
+  ],
+  // अंसपेशी - pectoral muscle
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "स", matra: "" },
+    { consonant: "प", matra: "े" },
+    { consonant: "श", matra: "ी" },
+  ],
+  // अंसपेशी - pecs
+  [
+    { consonant: "अ", matra: "ं" },
+    { consonant: "स", matra: "" },
+    { consonant: "प", matra: "े" },
+    { consonant: "श", matra: "ी" },
+  ],
+  // अऔरत - she
   [
     { consonant: "अ", matra: "" },
-    { consonant: "न", matra: "ु" },
-    { consonant: "भ", matra: "" },
-    { consonant: "व", matra: "" },
+    { consonant: "औ", matra: "" },
+    { consonant: "र", matra: "" },
+    { consonant: "त", matra: "" },
   ],
-  // मंजिल → 3
-  // बदमाश (badmaash - rascal)
+  // अकंचन - pauper
   [
-    { consonant: "ब", matra: "" },
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ं" },
+    { consonant: "च", matra: "" },
+    { consonant: "न", matra: "" },
+  ],
+  // अकड़न - stiffness
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "" },
+    { consonant: "ड", matra: "़" },
+    { consonant: "न", matra: "" },
+  ],
+  // अकथित - untold
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "" },
+    { consonant: "थ", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अकथ्य - unutterable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "" },
+    { consonant: "थ", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकरण - inactivity
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "" },
+  ],
+  // अकरण - inactiveness
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "" },
+  ],
+  // अकरण - inaction
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "" },
+  ],
+  // अकर्म - inaction
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "" },
+    { consonant: "र", matra: "्" },
+    { consonant: "म", matra: "" },
+  ],
+  // अकर्म - inactivity
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "" },
+    { consonant: "र", matra: "्" },
+    { consonant: "म", matra: "" },
+  ],
+  // अकर्म - inactiveness
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "" },
+    { consonant: "र", matra: "्" },
+    { consonant: "म", matra: "" },
+  ],
+  // अकर्मी - wicked
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "" },
+    { consonant: "र", matra: "्" },
+    { consonant: "म", matra: "ी" },
+  ],
+  // अकाचित - unvitrified
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "च", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अकाट्य - compelling
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "ट", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकाट्य - irrefutable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "ट", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकाट्य - watertight
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "ट", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकाट्य - unassailable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "ट", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकाट्य - cogent
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "ट", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकादमी - academy
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
     { consonant: "द", matra: "" },
-    { consonant: "म", matra: "ा" },
+    { consonant: "म", matra: "ी" },
+  ],
+  // अकारण - motiveless
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "" },
+  ],
+  // अकारण - unprovoked
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "" },
+  ],
+  // अकारण - wanton
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "" },
+  ],
+  // अकार्य - inaction
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकार्य - inactiveness
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकार्य - inactivity
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ा" },
+    { consonant: "र", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकिंचन - pauper
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "िं" },
+    { consonant: "च", matra: "" },
+    { consonant: "न", matra: "" },
+  ],
+  // अकिलीज़ - achilles
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ि" },
+    { consonant: "ल", matra: "ी" },
+    { consonant: "ज", matra: "़" },
+  ],
+  // अकिशिआ - acacia tree
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ि" },
+    { consonant: "श", matra: "ि" },
+    { consonant: "आ", matra: "" },
+  ],
+  // अकीयाई - achaian
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ी" },
+    { consonant: "य", matra: "ा" },
+    { consonant: "ई", matra: "" },
+  ],
+  // अकीयाई - achaean
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ी" },
+    { consonant: "य", matra: "ा" },
+    { consonant: "ई", matra: "" },
+  ],
+  // अकीर्ति - opprobrium
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ी" },
+    { consonant: "र", matra: "्" },
+    { consonant: "त", matra: "ि" },
+  ],
+  // अकुलीन - lowborn
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "ल", matra: "ी" },
+    { consonant: "न", matra: "" },
+  ],
+  // अकुशल - bad
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "श", matra: "" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अकुशल - untactful
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "श", matra: "" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अकुशल - inept
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "श", matra: "" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अकुशल - inexpert
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "श", matra: "" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अकुशल - tactless
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "श", matra: "" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अकुशल - maladroit
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "श", matra: "" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अकुशल - inapt
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "श", matra: "" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अकुशल - unskilled
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "श", matra: "" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अकुशल - unmethodical
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ु" },
+    { consonant: "श", matra: "" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अकृरित - untilled
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ृ" },
+    { consonant: "र", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अकृषित - untamed
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ृ" },
+    { consonant: "ष", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अकृषित - uncultivated
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ृ" },
+    { consonant: "ष", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अकृष्य - uncultivable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ृ" },
+    { consonant: "ष", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकृष्य - uncultivatable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ृ" },
+    { consonant: "ष", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अकेडिया - acadia
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "े" },
+    { consonant: "ड", matra: "ि" },
+    { consonant: "य", matra: "ा" },
+  ],
+  // अकेशिया - acacia
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "े" },
+    { consonant: "श", matra: "ि" },
+    { consonant: "य", matra: "ा" },
+  ],
+  // अकोमल - untender
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "ो" },
+    { consonant: "म", matra: "" },
+    { consonant: "ल", matra: "" },
+  ],
+  // अक्खड़ - impudent
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ख", matra: "" },
+    { consonant: "ड", matra: "़" },
+  ],
+  // अक्खड़ - rude
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ख", matra: "" },
+    { consonant: "ड", matra: "़" },
+  ],
+  // अक्खड़ - insolent
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ख", matra: "" },
+    { consonant: "ड", matra: "़" },
+  ],
+  // अक्खड़ - rebellious
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ख", matra: "" },
+    { consonant: "ड", matra: "़" },
+  ],
+  // अक्खड़ - bumptious
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ख", matra: "" },
+    { consonant: "ड", matra: "़" },
+  ],
+  // अक्रिय - inert
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "र", matra: "ि" },
+    { consonant: "य", matra: "" },
+  ],
+  // अक्रिय - inoperative
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "र", matra: "ि" },
+    { consonant: "य", matra: "" },
+  ],
+  // अक्रोट - wallnut
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "र", matra: "ो" },
+    { consonant: "ट", matra: "" },
+  ],
+  // अक्लांत - unwearied
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ल", matra: "ां" },
+    { consonant: "त", matra: "" },
+  ],
+  // अक्लांत - unweary
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ल", matra: "ां" },
+    { consonant: "त", matra: "" },
+  ],
+  // अक्लांत - untired
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ल", matra: "ां" },
+    { consonant: "त", matra: "" },
+  ],
+  // अक्लोम - abranchial
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ल", matra: "ो" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्लोम - abranchious
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ल", matra: "ो" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्लोम - gill less
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ल", matra: "ो" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्लोम - abranchiate
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ल", matra: "ो" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्षत - virginal
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "त", matra: "" },
+  ],
+  // अक्षत - untouched
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "त", matra: "" },
+  ],
+  // अक्षत - intact
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "त", matra: "" },
+  ],
+  // अक्षत - unhurt
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "त", matra: "" },
+  ],
+  // अक्षत - unimpaired
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "त", matra: "" },
+  ],
+  // अक्षत - inviolate
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "त", matra: "" },
+  ],
+  // अक्षम - inefficient
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्षम - null
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्षम - unqualified
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्षम - incompetent
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्षम - inert
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्षम - incapable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्षम - handicapped
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "म", matra: "" },
+  ],
+  // अक्षय - undisintegratable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "य", matra: "" },
+  ],
+  // अक्षय - unfailing
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "य", matra: "" },
+  ],
+  // अक्षर - syllable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अक्षर - letter
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अक्षर - font
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अक्षर - character
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अक्षर - consonant
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अक्षर - type
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अक्षांश - latitude
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "ष", matra: "ां" },
     { consonant: "श", matra: "" },
   ],
-  // गुमराह (gumraah - misled)
+  // अक्सर - manys the time
   [
-    { consonant: "ग", matra: "ु" },
-    { consonant: "म", matra: "" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "ह", matra: "" },
-  ],
-  // सहमत → 3
-  // तकलीफ → complex
-  // सफलता (safalta - success)
-  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
     { consonant: "स", matra: "" },
-    { consonant: "फ", matra: "" },
-    { consonant: "ल", matra: "" },
-    { consonant: "त", matra: "ा" },
+    { consonant: "र", matra: "" },
   ],
-  // विफलता (vifalata - failure)
+  // अक्सर - frequent
   [
-    { consonant: "व", matra: "ि" },
-    { consonant: "फ", matra: "" },
-    { consonant: "ल", matra: "" },
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "स", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अक्सर - manys the time that
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "स", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अक्सर - many a time
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "स", matra: "" },
+    { consonant: "र", matra: "" },
+  ],
+  // अक्सीर - elixir
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "क", matra: "्" },
+    { consonant: "स", matra: "ी" },
+    { consonant: "र", matra: "" },
+  ],
+  // अखंडता - integrity
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "ं" },
+    { consonant: "ड", matra: "" },
     { consonant: "त", matra: "ा" },
   ],
-  // कठपुतली → complex
-  // हिसाब → 3
-  // किताब → 3
-  // बेवकूफ → complex
-  // अखरोट (akhrot - walnut)
+  // अखंडता - wholeness
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "ं" },
+    { consonant: "ड", matra: "" },
+    { consonant: "त", matra: "ा" },
+  ],
+  // अखंडित - exclusive
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "ं" },
+    { consonant: "ड", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अखंडित - uncompartmented
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "ं" },
+    { consonant: "ड", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अखंडित - undivided
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "ं" },
+    { consonant: "ड", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अखंडित - nonsegmental
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "ं" },
+    { consonant: "ड", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अखंडित - unsegmented
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "ं" },
+    { consonant: "ड", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अखंडित - unbroken
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "ं" },
+    { consonant: "ड", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अखण्ड - intact
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "" },
+    { consonant: "ण", matra: "्" },
+    { consonant: "ड", matra: "" },
+  ],
+  // अखतीज - akhateej
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "" },
+    { consonant: "त", matra: "ी" },
+    { consonant: "ज", matra: "" },
+  ],
+  // अखबार - post
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "" },
+    { consonant: "ब", matra: "ा" },
+    { consonant: "र", matra: "" },
+  ],
+  // अखरोट - walnut
   [
     { consonant: "अ", matra: "" },
     { consonant: "ख", matra: "" },
     { consonant: "र", matra: "ो" },
     { consonant: "ट", matra: "" },
   ],
-  // संतरा → 3
-  // अनारदाना → 5
-  // मसालेदार → 5
-  // किशमिश (kishmish - raisin)
-  [
-    { consonant: "क", matra: "ि" },
-    { consonant: "श", matra: "" },
-    { consonant: "म", matra: "ि" },
-    { consonant: "श", matra: "" },
-  ],
-  // चहलकदमी → 5
-  // अभिमान (abhimaan - pride)
+  // अख़बार - newspaper
   [
     { consonant: "अ", matra: "" },
-    { consonant: "भ", matra: "ि" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "न", matra: "" },
+    { consonant: "ख", matra: "़" },
+    { consonant: "ब", matra: "ा" },
+    { consonant: "र", matra: "" },
   ],
-  // संभावना → complex
-  // बरामदा (baraamda - veranda)
+  // अखाद्य - inedible
   [
-    { consonant: "ब", matra: "" },
-    { consonant: "र", matra: "ा" },
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "ा" },
+    { consonant: "द", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अखाद्य - uneatable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ख", matra: "ा" },
+    { consonant: "द", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अगणित - numberless
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "" },
+    { consonant: "ण", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अगणित - uncounted
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "" },
+    { consonant: "ण", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अगम्य - unreachable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "" },
+    { consonant: "म", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अगम्य - impassable
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "" },
+    { consonant: "म", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अगम्य - inaccessible
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "" },
+    { consonant: "म", matra: "्" },
+    { consonant: "य", matra: "" },
+  ],
+  // अगस्त - august
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "" },
+    { consonant: "स", matra: "्" },
+    { consonant: "त", matra: "" },
+  ],
+  // अगस्त - aug
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "" },
+    { consonant: "स", matra: "्" },
+    { consonant: "त", matra: "" },
+  ],
+  // अगुआई - initiative
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "ु" },
+    { consonant: "आ", matra: "" },
+    { consonant: "ई", matra: "" },
+  ],
+  // अग्रणी - capital
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "ी" },
+  ],
+  // अग्रणी - groundbreaker
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "ी" },
+  ],
+  // अग्रणी - front runner
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "ी" },
+  ],
+  // अग्रणी - trailblazer
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "" },
+    { consonant: "ण", matra: "ी" },
+  ],
+  // अग्रता - priority
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "" },
+    { consonant: "त", matra: "ा" },
+  ],
+  // अग्रांग - extremity
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "ां" },
+    { consonant: "ग", matra: "" },
+  ],
+  // अग्रिम - foremost
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "ि" },
     { consonant: "म", matra: "" },
-    { consonant: "द", matra: "ा" },
   ],
-  // अलमारी (almaari - cupboard)
+  // अग्रिम - advance
   [
     { consonant: "अ", matra: "" },
-    { consonant: "ल", matra: "" },
-    { consonant: "म", matra: "ा" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "ि" },
+    { consonant: "म", matra: "" },
+  ],
+  // अग्रिम - upfront
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "्" },
+    { consonant: "र", matra: "ि" },
+    { consonant: "म", matra: "" },
+  ],
+  // अग्रीव - flange
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "ग", matra: "्" },
     { consonant: "र", matra: "ी" },
+    { consonant: "व", matra: "" },
   ],
-  // झिलमिल (jhilmil - shimmering)
+  // अघटित - unreduced
   [
-    { consonant: "झ", matra: "ि" },
-    { consonant: "ल", matra: "" },
-    { consonant: "म", matra: "ि" },
-    { consonant: "ल", matra: "" },
+    { consonant: "अ", matra: "" },
+    { consonant: "घ", matra: "" },
+    { consonant: "ट", matra: "ि" },
+    { consonant: "त", matra: "" },
   ],
-  // गुनगुना (gungunaa - to hum)
+  // अघोषित - unannounced
   [
-    { consonant: "ग", matra: "ु" },
-    { consonant: "न", matra: "" },
-    { consonant: "ग", matra: "ु" },
-    { consonant: "न", matra: "ा" },
+    { consonant: "अ", matra: "" },
+    { consonant: "घ", matra: "ो" },
+    { consonant: "ष", matra: "ि" },
+    { consonant: "त", matra: "" },
   ],
-  // टमटम (tamtam - horse cart)
+  // अघोषित - unstated
   [
-    { consonant: "ट", matra: "" },
-    { consonant: "म", matra: "" },
-    { consonant: "ट", matra: "" },
-    { consonant: "म", matra: "" },
+    { consonant: "अ", matra: "" },
+    { consonant: "घ", matra: "ो" },
+    { consonant: "ष", matra: "ि" },
+    { consonant: "त", matra: "" },
   ],
-  // कलकल (kalkal - gurgling sound)
+  // अघोषित - unpredicted
   [
-    { consonant: "क", matra: "" },
-    { consonant: "ल", matra: "" },
-    { consonant: "क", matra: "" },
-    { consonant: "ल", matra: "" },
+    { consonant: "अ", matra: "" },
+    { consonant: "घ", matra: "ो" },
+    { consonant: "ष", matra: "ि" },
+    { consonant: "त", matra: "" },
   ],
-  // हलचल (halchal - commotion)
+  // अघोषित - undeclared
   [
-    { consonant: "ह", matra: "" },
-    { consonant: "ल", matra: "" },
+    { consonant: "अ", matra: "" },
+    { consonant: "घ", matra: "ो" },
+    { consonant: "ष", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अघोषित - unheralded
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "घ", matra: "ो" },
+    { consonant: "ष", matra: "ि" },
+    { consonant: "त", matra: "" },
+  ],
+  // अचंचल - untrembling
+  [
+    { consonant: "अ", matra: "" },
+    { consonant: "च", matra: "ं" },
     { consonant: "च", matra: "" },
     { consonant: "ल", matra: "" },
   ],
-  // दमकल (damkal - fire engine)
-  [
-    { consonant: "द", matra: "" },
-    { consonant: "म", matra: "" },
-    { consonant: "क", matra: "" },
-    { consonant: "ल", matra: "" },
-  ],
-  // गड़बड़ (gadbad - mess/confusion)
-  [
-    { consonant: "ग", matra: "" },
-    { consonant: "ड़", matra: "" },
-    { consonant: "ब", matra: "" },
-    { consonant: "ड़", matra: "" },
-  ],
-  // बकबक (bakbak - chatter)
-  [
-    { consonant: "ब", matra: "" },
-    { consonant: "क", matra: "" },
-    { consonant: "ब", matra: "" },
-    { consonant: "क", matra: "" },
-  ],
-  // धमाकेदार → 5
-  // जबरदस्त → conjunct
-  // अफवाह (afvaah - rumor)
+  // अचकित - unsurprised
   [
     { consonant: "अ", matra: "" },
-    { consonant: "फ", matra: "" },
-    { consonant: "व", matra: "ा" },
-    { consonant: "ह", matra: "" },
-  ],
-  // मुकाम → 3
-  // बेदखल (bedakhal - dispossessed)
-  [
-    { consonant: "ब", matra: "े" },
-    { consonant: "द", matra: "" },
-    { consonant: "ख", matra: "" },
-    { consonant: "ल", matra: "" },
-  ],
-  // बदसूरत → complex
-  // खूबसूरत → complex
-  // बेमिसाल (bemisaal - unmatched)
-  [
-    { consonant: "ब", matra: "े" },
-    { consonant: "म", matra: "ि" },
-    { consonant: "स", matra: "ा" },
-    { consonant: "ल", matra: "" },
-  ],
-  // अदरक (adrak - ginger) → 3
-  // गुलाब → 3
-  // बादाम → 3
-  // नारियल (naariyal - coconut)
-  [
-    { consonant: "न", matra: "ा" },
-    { consonant: "र", matra: "ि" },
-    { consonant: "य", matra: "" },
-    { consonant: "ल", matra: "" },
-  ],
-  // अनपढ़ (anapadh - illiterate) → 3
-  // पढ़ाकू → 3
-  // कबाड़ → 3
-  // कबूतर (kabutar - pigeon)
-  [
-    { consonant: "क", matra: "" },
-    { consonant: "ब", matra: "ू" },
+    { consonant: "च", matra: "" },
+    { consonant: "क", matra: "ि" },
     { consonant: "त", matra: "" },
-    { consonant: "र", matra: "" },
   ],
-  // बटमार (batmaar - mugger)
-  [
-    { consonant: "ब", matra: "" },
-    { consonant: "ट", matra: "" },
-    { consonant: "म", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // गुजारा (guzaara - livelihood)
-  [
-    { consonant: "ग", matra: "ु" },
-    { consonant: "ज", matra: "ा" },
-    { consonant: "र", matra: "ा" },
-    { consonant: "ल", matra: "" }, // wrong 3 - fixing below
-  ],
-  // दरबान (darbaan - gatekeeper)
-  [
-    { consonant: "द", matra: "" },
-    { consonant: "र", matra: "" },
-    { consonant: "ब", matra: "ा" },
-    { consonant: "न", matra: "" },
-  ],
-  // चौकीदार (chaukeedaar - guard)
-  [
-    { consonant: "च", matra: "ौ" },
-    { consonant: "क", matra: "ी" },
-    { consonant: "द", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // मालिक → 3
-  // करवट (karvat - turn) → 3
-  // अफसाना (afsaana - tale)
+  // अचम्भा - surprise
   [
     { consonant: "अ", matra: "" },
-    { consonant: "फ", matra: "" },
-    { consonant: "स", matra: "ा" },
-    { consonant: "न", matra: "ा" },
-  ],
-  // दास्तान → complex
-  // हिंदुस्तान → 5
-  // जानकार (jaankaar - knowledgeable)
-  [
-    { consonant: "ज", matra: "ा" },
-    { consonant: "न", matra: "" },
-    { consonant: "क", matra: "ा" },
-    { consonant: "र", matra: "" },
-  ],
-  // सौदागर (saudaagar - merchant)
-  [
-    { consonant: "स", matra: "ौ" },
-    { consonant: "द", matra: "ा" },
-    { consonant: "ग", matra: "" },
-    { consonant: "र", matra: "" },
-  ],
-  // तजुर्बा → complex
-  // बेगानापन → 5
-  // जुगनू → 3
-  // नकलची (nakalchi - copycat)
-  [
-    { consonant: "न", matra: "" },
-    { consonant: "क", matra: "" },
-    { consonant: "ल", matra: "" },
-    { consonant: "च", matra: "ी" },
-  ],
-  // बनारसी (banaarsi - from Benaras)
-  [
-    { consonant: "ब", matra: "" },
-    { consonant: "न", matra: "ा" },
-    { consonant: "र", matra: "" },
-    { consonant: "स", matra: "ी" },
-  ],
-  // लखनवी (lakhnavee - from Lucknow)
-  [
-    { consonant: "ल", matra: "" },
-    { consonant: "ख", matra: "" },
-    { consonant: "न", matra: "" },
-    { consonant: "व", matra: "ी" },
-  ],
-  // चंचल (chanchal - restless) → 3
-  // खुशहाल (khushhaal - prosperous)
-  [
-    { consonant: "ख", matra: "ु" },
-    { consonant: "श", matra: "" },
-    { consonant: "ह", matra: "ा" },
-    { consonant: "ल", matra: "" },
-  ],
-  // सागर → 3
-  // बेताब (betaab - restless)
-  [
-    { consonant: "ब", matra: "े" },
-    { consonant: "त", matra: "ा" },
-    { consonant: "ब", matra: "" },
-    { consonant: "क", matra: "" }, // wrong - 3 aksharas
-  ],
-  // मोरचा → 3
-  // बिछौना (bichhauna - bedsheet)
-  [
-    { consonant: "ब", matra: "ि" },
-    { consonant: "छ", matra: "ौ" },
-    { consonant: "न", matra: "ा" },
-    { consonant: "ज", matra: "" }, // wrong - 3
+    { consonant: "च", matra: "" },
+    { consonant: "म", matra: "्" },
+    { consonant: "भ", matra: "ा" },
   ],
 ];
 
-// Filter to ensure we only have valid 4-syllable words (safety check)
 export const VALID_WORDS = WORDS.filter(w => w.length === 4);
 
-// Get the daily word based on today's date
 export function getDailyWord(): Word {
   const now = new Date();
-  const start = new Date(2026, 0, 1); // Jan 1 2026
+  const start = new Date(2026, 0, 1);
   const diff = Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
   return VALID_WORDS[diff % VALID_WORDS.length];
 }
 
-// Get a random word for practice mode
 export function getRandomWord(): Word {
   return VALID_WORDS[Math.floor(Math.random() * VALID_WORDS.length)];
 }
