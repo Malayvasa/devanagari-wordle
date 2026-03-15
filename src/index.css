@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    margin: 0;
+    background-color: #121213;
+    color: #ffffff;
+    font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@keyframes flip-in {
+  0% { transform: rotateX(0deg); background-color: transparent; }
+  49% { transform: rotateX(-90deg); }
+  50% { transform: rotateX(-90deg); }
+  100% { transform: rotateX(0deg); }
+}
+
+@keyframes bounce-in {
+  0%, 20% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  60% { transform: scale(0.96); }
+  80% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes toast-slide {
+  0% { opacity: 0; transform: translateY(-12px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-12px); }
+}
+
+.tile-flip {
+  animation: flip-in 0.5s ease-in-out forwards;
+}
+
+.tile-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.tile-bounce {
+  animation: bounce-in 0.08s ease-in-out;
+}
+
+.tile-pop {
+  animation: pop 0.08s ease-in-out;
+}
+
+.toast-animate {
+  animation: toast-slide 2s ease-in-out forwards;
+}
+
+.toast-animate-long {
+  animation: toast-slide 4s ease-in-out forwards;
+}
